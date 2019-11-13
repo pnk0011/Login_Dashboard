@@ -1,6 +1,19 @@
-var app = angular.module('MyAwesomeApp', ['chart.js']);
+var app = angular.module('MyAwesomeApp',[]);
 
-app.controller('cnt', function ($scope, $http) {
+app.controller('cnt', function ($scope, $http,$window) {
+
+
+  // verrify user 
+  $scope.USERNAME == '';
+  $scope.PASSWORD == '';
+  $scope.loginsuccessful = '';
+
+  $scope.verifyLogin = function () {
+    if ($scope.USERNAME == 'user1' && $scope.PASSWORD == 'password'){
+      $scope.loginsuccessful = 'successful';
+      $window.location = 'DashBoard.html';
+    }
+  }
   
   //Graph Container Method Call 
   $scope.labels = [];
