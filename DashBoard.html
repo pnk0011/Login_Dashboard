@@ -165,6 +165,15 @@
 .modal p {
     word-wrap: break-word;
 }
+
+   /* required classes */
+
+.header {
+    padding: 10px 16px;
+    background: #555;
+    color: #f1f1f1;
+    z-index: 9999;
+  }
 </style>
 </head>
 
@@ -185,16 +194,7 @@
           </div>
         <div class="container-fluid">
          
-          <ul class="nav nav-tabs navbar-nav">
-              <li><a data-toggle="tab" ng-click="ActivelineGraph=false;imageStream=false;putloader = false" href="#RegistrationContainer">Registration Portal</a></li>
-            <li ><a data-toggle="tab" ng-click="VideoContainerMethod();ActivelineGraph=false;imageStream=false;putloader = false" href="#videoContainer" >Video Container</a></li>
-            <li><a data-toggle="tab" ng-click="ImageContainerMethod();ActivelineGraph=false;putLoader()" href="#ImageContainer"  >Image Container</a></li>
-            <li><a data-toggle="tab" ng-click="GraphContainerMethod();" href="#GraphContainer" >Gaph Container</a></li>
-            <li><a data-toggle="tab" ng-click="LoggingContainerMethod();ActivelineGraph=false;imageStream=false;putLoader()" href="#LoggingContainer">Logging Container</a></li>
-            
-            
-          </ul>
-
+        
           
 
       <div class="tab-content"   class="animate-bottom">
@@ -229,58 +229,14 @@
           
       
            
-            <!-- Registration Container tab div -->
+            <!-- Graph container -->
 
             <div class="tab-pane fade in active" id="RegistrationContainer" style="height: 85%;width: 100%;" >
 
 
-                <div class="container register" style="margin-top: 5%;z-index: 0" >
-                    <div class="row">
-                        <div class="col-md-4 register-left">
-                           
-                            <h3>Welcome</h3>
-                         
-                          
-                        </div>
-                        <div class="col-md-8 register-right">
-                            
-                            
-                            <div >
-                                <div >
-                                  
-                                 
-                                    <div class="row register-form">
-                                      <form name="registration">
-                                        <div class="col-md-12">
-                                            <div class="form-group col-md-12 row">
-                                                <input required type="text" minlength="5" maxlength="10" name="username" style="width: 60%;" class="form-control" placeholder="User Name*" ng-model="Register.USERNAME" />
-                                                <p ng-show = "registration.submitted && registration.username.$invalid "><span class="glyphicon glyphicon-alert"></span> Must have minimum 5 characters and a maximum of 10 characters   </p>
-                                            </div>
-                                          
-                                            <div class="form-group col-md-12 row">
-                                                <input required type="text" style="width: 60%;" name="emailID" class="form-control" ng-model="Register.EMAILID" placeholder="Email-Id*"    ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" />
-                                                <p ng-show = "registration.submitted && registration.emailID.$invalid "><span class="glyphicon glyphicon-alert"></span> Enter valid Email-Id    </p>
-                                            </div>
-                                            <div class="form-group col-md-12 row">
-                                                <input required type="password" style="width: 60%;" name="password" class="form-control" ng-model="Register.PASSWORD"  placeholder="Password*"  ng-pattern="/^(?=.*[a-z])(?=.*[A-Z].)(?=.*[0-9].*[0-9].*[0-9])(?=.*[!@#\$%\^&\*].*[!@#\$%\^&\*()])(?=.{7,})/"  value="" />
-                                                <p ng-show = "registration.submitted && registration.password.$invalid "><span class="glyphicon glyphicon-alert"></span> Password must contain one lowercase, one uppercase, three digits and two special characters    </p>
-                                            </div>
-                                            <input type="submit" class="btnRegister" ng-click="sendRegistrationData(Register)" />
-                                           
-                                        </div>
-                                      </form>
-                                    </div>
-                                  
-                                </div>
-                               
-                            </div>
-                          
-                        </div>
-                      
-                    </div>
-          
-                </div>
-              
+              <div class="header" id="Doctorfixit">
+                <h2>ForRent.com</h2>
+              </div>
                
 
            </div>
