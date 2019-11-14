@@ -10,8 +10,10 @@ app.controller('cnt', function ($scope, $http,$window) {
 
   $scope.verifyLogin = function () {
     if ($scope.USERNAME == 'user1' && $scope.PASSWORD == 'password'){
+      $scope.GraphContainerMethod();
       $scope.loginsuccessful = 'successful';
-      $window.location = 'DashBoard.html';
+      $window.location = 'Graph.html';
+   
     }
   }
   
