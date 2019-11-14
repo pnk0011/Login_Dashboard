@@ -1,4 +1,4 @@
-var app = angular.module('MyAwesomeApp',[]);
+var app = angular.module('MyAwesomeApp', ['chart.js']);
 
 app.controller('cnt', function ($scope, $http,$window) {
 
