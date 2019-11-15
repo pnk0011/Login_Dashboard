@@ -1,0 +1,11 @@
+#First extract the downloaded zip file.
+
+#Run the following command in the extracted file directory git bash :-
+
+ npm install
+
+#After successful installation of dependent packages, run the following command :-
+
+ npm start
+
+#Open localhost:8080 in your browser to view the application.
