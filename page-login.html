@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" ng-app="MyAwesomeApp"  ng-controller="cnt"  >
 
 
 <head>
@@ -19,14 +19,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="node_modules/chart.js/dist/Chart.min.js"></script>
-<script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
   
 
 
 
     <script src="app.js"></script>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
 
     <style>
      #ip1 {
@@ -91,13 +91,160 @@
   margin-top: 90px;
 }
 
+ /* css for graph page  */
+
+ * {
+            box-sizing: border-box;
+        }
+
+        .body-main {
+            height: 100 vh;
+            width: 100 wh;
+        }
+
+        .header-text {
+
+            background-color: #013220;
+            padding: 0px 30px 0px 30px;
+
+            font-size: 35px;
+            color: white;
+        }
+
+        .flexcontainer {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .graph-div {
+            border: #888888 solid 1px;
+
+            margin: 15px 0px 12px 20px;
+            width: 97%;
+            height: 69%;
+        }
+
+
+
+        .header-Power-Profile {
+            color: #1B43BA;
+            margin-left: 10px;
+        }
+
+        .line-symbol1 {
+            width: 14%;
+            border-top: 5px solid lightblue;
+        }
+
+        .line-symbol2 {
+            width: 14%;
+            border-top: 5px solid gray;
+        }
+
+        .flex-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
+        }
+
+        hr {
+            margin-top: 8px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 8px;
+        }
+
+        .bottom-div1 {
+            border: #888888 solid 1px;
+            box-shadow: 2px 4px #888888;
+            margin-left: -100px;
+            height: 125px;
+
+        }
+
+        .bottom-div2 {
+            border: #888888 solid 1px;
+            box-shadow: 2px 4px #888888;
+
+            height: 125px;
+        }
+
+        .bottom-div3 {
+            border: #888888 solid 1px;
+            box-shadow: 2px 4px #888888;
+            margin-right: -100px;
+
+            height: 125px;
+        }
+
+        .flexspace-around {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .element-center {
+            display: flex;
+          
+            justify-content: center;
+            align-items: center;
+        }
+        .progress  {
+            height: 12px !important;
+        }
+        .pointer {cursor: pointer;}
+
+        /* loader CSS */
+ #loader {
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  margin: -75px 0 0 -75px;
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #3498db;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+
 
     </style>
 
 </head>
 
-<body ng-app="MyAwesomeApp"  ng-controller="cnt" style="background-color: #013220;">
- <div >
+<body     >
+ <div  ng-show="currentPage == 'page-login'"  style="background-color: #013220;" >
         <div class="container">
             <div class="login-content">
               
@@ -122,7 +269,81 @@
             </div>
         </div>
     </div>
+
+    <div  class="body-main" ng-show="currentPage == 'Graph'">    
+        <div id="loader" ng-if="putloader"> </div>
+
+
+    <header class="header-text flexcontainer">
+        <h4>Dashboard</h4>
+        <h4 ng-click="backToLoginPage()" style="cursor: pointer" >Logout</h4>
+    </header>
+
+    <div class="graph-div">
+
+        <header class="flexcontainer">
+            <h4 class="header-Power-Profile">Power Profile</h4>
+
+        </header>
+        <div>
+            <div class="row container">
+                <div class="col-md-2 col-sm-2"> </div>
+                <div class="col-md-2 col-sm-4 flex-wrap">
+                    <hr class="line-symbol1" />
+                    <p> <b> Load Active Power </b> </p>
+                </div>
+
+                <div class="col-md-2 col-sm-4 flex-wrap">
+                    <hr class="line-symbol2" />
+                    <p> <b> Solar Power </b></p>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div>
+            <canvas id="line" class="chart chart-line canvas-graph" chart-data="data" chart-labels="labels"
+                chart-series="series" chart-options="options" width="1325px" height="370px" colours ="colours"
+                chart-dataset-override="datasetOverride" chart-click="onClick">
+            </canvas>
+        </div>
+
+    </div>
+    <div class="row flexspace-around">
+        <div class="col-md-3 col-sm-2 col-xs-2 bottom-div1">
+            <div >
+                <h3 class="element-center" style="color: #1B43BA;"><b>  {{loadPoweAvg | number : 3}} </b></h3> 
+                <h3 class="element-center" style="color: #1B43BA;"><b>kW </b></h3> 
+                <h4 class="element-center">Load Power</h4>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 col-sm-2 col-xs-2 bottom-div2">
+                <div >
+                        <h3 class="element-center" style="color: #1B43BA;"><b> {{solarPowerAvg | number : 3 }}  </b></h3> 
+                        <h3 class="element-center" style="color: #1B43BA;"><b>kW </b></h3> 
+                        <h4 class="element-center">Solar Power</h4>
+                    </div>
+
+        </div>
+
+        <div class="col-md-3 col-sm-2 col-xs-2 bottom-div3">
+            <div><h3 class="element-center" style="color: #1B43BA;"><b> {{batteryPercentage}}% </b></h3></div>
+                <div class="progress">
+                        <div class="progress-bar" role="progressbar"  aria-valuemin="0" aria-valuemax="100" ng-style="{width: batteryPercentage+'%'}">
+                       
+                        </div>
+                      </div>
+                      <div>  <h4 class="element-center">Battery State of Charge(SOC)</h4></div>
+        </div>
+    </div>
+    </div>
     
 </body>
+
 
 </html>
